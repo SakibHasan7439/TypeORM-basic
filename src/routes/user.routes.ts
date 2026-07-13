@@ -22,4 +22,22 @@ router.post("/", async (req: Request, res: Response) => {
     }
 });
 
+router.get("/", async (req: Request, res: Response) => {
+    try {
+        const users = await userRepository.getUsers();
+        res.status(201).json({
+            success: true,
+            message: "Users retrieved successfully",
+            data: users,
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to retrieve users",
+            error,
+        });
+    }
+});
+
 export const userRoutes = router;

@@ -13,4 +13,10 @@ export class UserRepository {
 
         return userRepo.save(user);
     }
+
+    async getUsers () : Promise<User[]> {
+        const queryBuilder = userRepo.createQueryBuilder('user');
+        const users = await queryBuilder.getMany();
+        return users;
+    }
 }
