@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import dotenv from 'dotenv';
 import { User } from "./entities/user";
 import { Photo } from "./entities/photo";
+import { PhotoMetaData } from "./entities/photoMetaData";
 
 dotenv.config();
 
@@ -15,7 +16,8 @@ export const AppDataSource = new DataSource({
     synchronize: false,
     entities: [
         User,
-        Photo
+        Photo,
+        PhotoMetaData
     ],
     migrations: ["src/migrations/*.ts"],
 
