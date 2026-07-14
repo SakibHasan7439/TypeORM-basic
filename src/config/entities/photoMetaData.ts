@@ -10,7 +10,7 @@ export class PhotoMetaData {
     height!: number
 
     @Column("int")
-    weight!: number
+    width!: number
 
     @Column("varchar")
     orientation!: string

@@ -13,3 +13,12 @@ export interface IUpdatePhoto {
   views?: number;
   isPublished?: boolean;
 }
+
+export interface ICreatePhotoMetaData {
+    height : number;
+    width : number;
+    compressed : string;
+    comment : string;
+    orientation : string;
+    photoId: string;
+}
