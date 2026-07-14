@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import dotenv from 'dotenv';
 import { User } from "./entities/user";
+import { Photo } from "./entities/photo";
 
 dotenv.config();
 
@@ -11,6 +12,11 @@ export const AppDataSource = new DataSource({
     ssl: {
         rejectUnauthorized: false
     },
-    synchronize: true,
-    entities: [User]
+    synchronize: false,
+    entities: [
+        User,
+        Photo
+    ],
+    migrations: ["src/migrations/*.ts"],
+
 })
