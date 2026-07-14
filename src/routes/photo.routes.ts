@@ -40,4 +40,23 @@ router.get("/", async (req: Request, res: Response) => {
     }
 });
 
-export const userRoutes = router;
+router.get("/:id", async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const photo = await photoRepository.getPhotoById(id as string);
+        res.status(201).json({
+            success: true,
+            message: "photo retrieved successfully",
+            data: photo,
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to retrieve photos",
+            error,
+        });
+    }
+});
+
+export const photoRoutes = router;

@@ -16,4 +16,16 @@ export class PhotoRepository {
         const photos = queryBuilder.getMany();
         return photos;
     }
+
+    async getPhotoById(id: string) : Promise<Photo> {
+        const queryBuilder = photoRepo.createQueryBuilder();
+        const photo = await queryBuilder.where('Photo.id = :id', {
+            id
+        }).getOne();
+        
+        if(!photo){
+            throw new Error("Photo not found!");
+        }
+        return photo;
+    }
 };
