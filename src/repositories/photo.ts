@@ -28,4 +28,17 @@ export class PhotoRepository {
         }
         return photo;
     }
+
+    async deletePhotoById (id: string) : Promise<Photo> {
+        const photo = await photoRepo.findOne({
+            where: {id}
+        });
+
+        if(!photo){
+            throw new Error("Photo not found!");
+        };
+
+        const result = await photoRepo.remove(photo);
+        return result;
+    }
 };

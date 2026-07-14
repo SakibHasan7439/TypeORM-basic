@@ -59,4 +59,23 @@ router.get("/:id", async (req: Request, res: Response) => {
     }
 });
 
+router.delete("/:id", async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const photo = await photoRepository.deletePhotoById(id as string);
+        res.status(201).json({
+            success: true,
+            message: "photo deleted successfully",
+            data: photo,
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete photos",
+            error,
+        });
+    }
+});
+
 export const photoRoutes = router;
