@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { PostStatus } from "../../enums/postStatus";
+import { User } from "./user";
 
 @Entity()
 export class Posts {
@@ -18,4 +19,7 @@ export class Posts {
         default: PostStatus.Pending
     })
     status!: PostStatus
+
+     @ManyToOne(() => User, (user) => user.posts)
+    user!: User
 }

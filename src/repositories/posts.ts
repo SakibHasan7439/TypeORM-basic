@@ -1,22 +1,50 @@
 import { AppDataSource } from "../config/data-source";
 import { Posts } from "../config/entities/post";
+import { User } from "../config/entities/user";
 import { IPostPayload } from "../interface/interface";
 
 
 const postRepo = AppDataSource.getRepository(Posts);
+const userRepo = AppDataSource.getRepository(User);
 
 export class PostRepository {
     async createPost (payload: IPostPayload): Promise<Posts> {
-        const post = postRepo.create(payload);
 
-        const result = await postRepo.save(post);
+        const {userId, ...postData} = payload;
+
+        const isUserExist = await userRepo.findOneBy({id: userId})
+        if(!isUserExist){
+            throw new Error("User not found");
+        }
+
+        const post = postRepo.create({
+            ...postData,
+            user: {
+                id: userId
+            }
+        });
+
+        const saved = await postRepo.save(post);
+
+        const result = await postRepo.findOne({
+            where: { id: saved.id },
+            relations: { user: true },
+            select: {
+                
+            }
+        })
+
+        if(!result){
+            throw new Error("No user found for this posts");
+        }
         return result;
     }
 
     async getPosts (filters: {
         title ?: string,
         content ?: string,
-        status ?: string
+        status ?: string,
+        userId ?: string
     }): Promise<Posts[]> {
 
         const query = postRepo.createQueryBuilder("post");

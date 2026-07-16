@@ -25,11 +25,12 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.get("/", async (req: Request, res: Response) => {
     try {
-        const {title, content, status} = req.query;
+        const {title, content, status, userId} = req.query;
         const users = await postRepository.getPosts({
             title:title as string,
             content:content as string, 
-            status:status as string   
+            status:status as string,
+            userId: userId as string   
         });
         res.status(201).json({
             success: true,

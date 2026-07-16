@@ -15,7 +15,7 @@ export class UserRepository {
         if(isUserExist){
             throw new Error("User already exist");
         }
-        
+
         user.name = name;
         user.email = email;
         user.isActive = isActive;
@@ -27,5 +27,18 @@ export class UserRepository {
         const queryBuilder = userRepo.createQueryBuilder('user');
         const users = await queryBuilder.getMany();
         return users;
+    }
+
+    async getUserById (id: string) : Promise<User> {
+        const user = await userRepo.findOne({
+            where: {
+                id
+            }
+        });
+
+         if (!user) {
+            throw new Error("User not found");
+        }
+        return user;
     }
 }

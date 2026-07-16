@@ -29,4 +29,5 @@ export interface IPostPayload {
   title: string;
   content: string;
   status: PostStatus;
+  userId: string;
 }

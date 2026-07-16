@@ -40,4 +40,25 @@ router.get("/", async (req: Request, res: Response) => {
     }
 });
 
+
+router.get("/:id", async(req:Request, res: Response) => {
+    try {
+        const {id} = req.params;
+        const user = await userRepository.getUserById(id as string);
+
+        res.status(201).json({
+            success: true,
+            message: "Users retrieved successfully",
+            data: user,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Failed to retrieve users",
+            error,
+        });
+    }
+})
+
+
 export const userRoutes = router;
