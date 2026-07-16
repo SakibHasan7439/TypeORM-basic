@@ -1,3 +1,5 @@
+import { PostStatus } from "../enums/postStatus";
+
 export interface ICreatePhoto {
   name: string;
   description: string;
@@ -21,4 +23,10 @@ export interface ICreatePhotoMetaData {
     comment : string;
     orientation : string;
     photoId: string;
+};
+
+export interface IPostPayload {
+  title: string;
+  content: string;
+  status: PostStatus;
 }
