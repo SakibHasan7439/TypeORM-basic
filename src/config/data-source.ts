@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { User } from "./entities/user";
 import { Photo } from "./entities/photo";
 import { PhotoMetaData } from "./entities/photoMetaData";
+import { Profile } from "./entities/profile";
 
 
 dotenv.config();
@@ -18,7 +19,8 @@ export const AppDataSource = new DataSource({
     entities: [
         User,
         Photo,
-        PhotoMetaData
+        PhotoMetaData,
+        Profile
     ],
     migrations: ["src/migrations/*.ts"],
 

@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Profile } from "./profile";
 
 @Entity()
 export class User {
@@ -8,13 +9,13 @@ export class User {
     @Column({type: "varchar"})
     name!: string;
 
-    @Column({type: "varchar"})
+    @Column({type: "varchar", unique: true})
     email!: string;
 
     @Column({type: "bool", default: true, nullable: true})
     isActive!: boolean;
 
-    // @OneToOne(() => Profile)
-    // @JoinColumn()
-    // profile!: Profile
+    @OneToOne(() => Profile)
+    @JoinColumn()
+    profile!: Profile
 }

@@ -7,6 +7,15 @@ export class UserRepository {
 
     async createUser (name: string, email: string, isActive: boolean): Promise<User> {
         const user = new User();
+
+        const isUserExist = await userRepo.findOne({
+            where: { email }
+        });
+
+        if(isUserExist){
+            throw new Error("User already exist");
+        }
+        
         user.name = name;
         user.email = email;
         user.isActive = isActive;
