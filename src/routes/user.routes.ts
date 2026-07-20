@@ -6,8 +6,8 @@ const userRepository = new UserRepository();
 
 router.post("/", async (req: Request, res: Response) => {
     try {
-        const { name, email, isActive } = req.body;
-        const user = await userRepository.createUser(name, email, isActive);
+        const { name, email, isActive, gender, photo } = req.body;
+        const user = await userRepository.createUser(name, email, isActive, gender, photo);
         res.status(201).json({
             success: true,
             data: user,
@@ -16,8 +16,7 @@ router.post("/", async (req: Request, res: Response) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Failed to create user",
-            error,
+            message: error instanceof Error ? error.message : "Failed to create user",
         });
     }
 });

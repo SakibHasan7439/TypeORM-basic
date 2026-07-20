@@ -47,7 +47,14 @@ export class PostRepository {
         userId ?: string
     }): Promise<Posts[]> {
 
-        const query = postRepo.createQueryBuilder("post");
+        const query = postRepo.createQueryBuilder("post")
+        .leftJoin("post.user", "user")
+        .select([
+            "post",
+            "user.id",
+            "user.name"
+        ]);
+
         if(filters.title){
             query.orWhere(
                 "post.title ILIKE :title",
