@@ -19,4 +19,14 @@ export class QuestionRepository {
 
         return await questionRepo.save(question);
     }
+
+    async getQuestions (): Promise<Question[]> {
+        const questions = await questionRepo.find({
+            relations: {
+                categories: true
+            }
+        });
+
+        return questions;
+    }
 }

@@ -17,4 +17,14 @@ router.post("/", asyncHandler( async(req: Request, res: Response) => {
     });
 }));
 
+router.get("/", asyncHandler( async(req: Request, res: Response) => {
+    const question = await questionRepo.getQuestions();
+
+    res.status(200).json({
+      success: true,
+      message: "question retrieved successfully",
+      data: question,
+    });
+}));
+
 export const QuestionRoutes = router;

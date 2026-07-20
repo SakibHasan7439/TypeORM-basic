@@ -12,7 +12,7 @@ export class Question {
     @Column({type: "varchar"})
     text!: string
 
-    @ManyToMany(() => Category)
+    @ManyToMany(() => Category, (category) => category.question)
     @JoinTable()
     categories!: Category[];
 }

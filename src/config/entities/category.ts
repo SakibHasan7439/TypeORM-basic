@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Question } from "./question";
 
 @Entity()
 export class Category {
@@ -7,4 +8,7 @@ export class Category {
 
     @Column({type: "varchar"})
     name!: string
+
+    @ManyToMany(()=> Question, (question) => question.categories)
+    question!: Question[]
 }

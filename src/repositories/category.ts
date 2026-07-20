@@ -13,7 +13,11 @@ export class CategoryRepository {
     }
 
     async getCategories (): Promise<Category[]> {
-        const result = await categoryRepo.find();
-        return result;
+        const queryBuilder = categoryRepo.createQueryBuilder("category");
+        const category = await queryBuilder
+            .leftJoinAndSelect("category.question", "question")
+            .getMany();
+
+        return category;
     }
 }
