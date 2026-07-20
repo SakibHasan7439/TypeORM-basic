@@ -5,6 +5,8 @@ import { Photo } from "./entities/photo";
 import { PhotoMetaData } from "./entities/photoMetaData";
 import { Profile } from "./entities/profile";
 import { Posts } from "./entities/post";
+import { Category } from "./entities/category";
+import { Question } from "./entities/question";
 
 
 dotenv.config();
@@ -22,7 +24,9 @@ export const AppDataSource = new DataSource({
         Photo,
         PhotoMetaData,
         Profile,
-        Posts
+        Posts,
+        Category,
+        Question
     ],
     migrations: ["src/migrations/*.ts"],
 

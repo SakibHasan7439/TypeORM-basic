@@ -5,6 +5,8 @@ import { photoRoutes } from './routes/photo.routes';
 import { photoMetaDataRoutes } from './routes/photoMetaData.routes';
 import { profileRoutes } from './routes/profile.routes';
 import { postRoutes } from './routes/post.routes';
+import { CategoryRoutes } from './routes/category.routes';
+import { QuestionRoutes } from './routes/question.route';
 
 
 const app = express();
@@ -21,5 +23,7 @@ app.use("/api/photos", photoRoutes);
 app.use("/api/photoMetaData", photoMetaDataRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/category", CategoryRoutes);
+app.use("/api/question", QuestionRoutes);
 
 export default app;

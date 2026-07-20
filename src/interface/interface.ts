@@ -31,3 +31,9 @@ export interface IPostPayload {
   status: PostStatus;
   userId: string;
 }
+
+export interface IQuestionPayload {
+  title     : string;
+  text      : string;
+  categories: string[];
+}
